@@ -33,12 +33,9 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to log the user in
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Authentication successful
-            return redirect()->route('dashboard'); // Change 'dashboard' to your actual dashboard route
+            return redirect()->route('mybooks.index');
         } else {
-            // Authentication failed
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
     }
@@ -69,7 +66,6 @@ class UserController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        // Create a new user
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -77,10 +73,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Log the user in
         Auth::login($user);
 
-        return redirect()->route('dashboard'); // Change 'dashboard' to your actual dashboard route
+        return redirect()->route('mybooks.index');
     }
 
     /**
@@ -95,6 +90,6 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/dashboard');
+        return redirect('/');
     }
 }
