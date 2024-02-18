@@ -30,7 +30,7 @@
         <header class="text-center mb-4">
             <!-- navegación lol -->
             <nav class="navbar">
-                <!-- Poner LOGO después-------------- -->
+                <!-- Poner LOGO después---------------->
                 <div class="navbar-brand">
                     <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/25583/images/ojFYHciRPq3uX8OMXXDN_Learn_Biomimicry_Logo_-_Square_-_Transparent_with_Blue_Gradient_-_LRG.png" alt="Logo" width="150" height="150">
                     </a>
