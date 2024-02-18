@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Página de Inicio de Sesión: Book Repository </title>
+    <title> Página de Registro: Book Repository </title>
 
     <!--Cdn Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,17 +25,26 @@
 </head>
 
 <body>
-
     <div class="login-container">
         <div class="login-box">
             <div class="login-header">
                 <div class="login-icon">
+                    <!--Imagen que se va a cambiar porque no es el logo -->
                     <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/25583/images/ojFYHciRPq3uX8OMXXDN_Learn_Biomimicry_Logo_-_Square_-_Transparent_with_Blue_Gradient_-_LRG.png"
                         alt="Login Icon">
                 </div>
-                <h2>Iniciar Sesión</h2>
+                <h2>Registro de usuario</h2>
             </div>
-            <form class="login-form">
+            <form class="login-form" action="{{ route('registro') }}" method="POST">
+                @csrf <!-- Agrega el token CSRF para protección contra falsificación de solicitudes entre sitios -->
+                <div class="form-group">
+                    <label for="first-name">Nombre</label>
+                    <input type="text" id="first-name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Apellido</label>
+                    <input type="text" id="last-name" name="last_name" required>
+                </div>
                 <div class="form-group">
                     <label for="email">Email ID</label>
                     <input type="email" id="email" name="email" required>
@@ -44,10 +53,11 @@
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="login-button">Login</button>
+                <div class="form-group form-footer">
+                    <button type="submit" class="login-button">Registrarse</button>
                 </div>
             </form>
+            
         </div>
     </div>
 
