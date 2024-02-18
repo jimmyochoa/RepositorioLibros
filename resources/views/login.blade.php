@@ -20,8 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
 
-    <!--Estilos de css-->
-    @vite(['resources/css/style-register.css', 'resources/js/app.js'])
+    <style rel="stylesheet">body{font-family:'Bentham',serif;background-color:#BEDDE2;margin:0;padding:0;display:flex;justify-content:center;align-items:center;height:100vh;}.login-container{text-align:center;}.login-box{background-color:#edeae5;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1);width:400px;margin:auto;padding:20px;}.login-header{margin-bottom:10px;}.login-icon img{width:100px;}.h2{color:#2F4858;margin:10px 0;}.login-form{text-align:left;}.form-group{margin-bottom:15px;}.form-group label{display:block;color:#2F4858;margin-bottom:5px;}.form-group input{width:100%;padding:10px;border:none;border-radius:4px;margin-bottom:10px;background-color:#c9cbc9;color:#2c3e50;}.login-button{width:100%;padding:10px;border:none;border-radius:4px;background-color:#4fb3a1;color:white;cursor:pointer;font-size:15px;}.login-button:hover{background-color:#7FD1AE;}.form-footer{display:flex;justify-content:space-between;align-items:center;}.checkbox label{color:black;font-size:14px;cursor:pointer;}.checkbox input{margin-right:5px;text-align:center;}.forgot-password:hover{text-decoration:underline;}
+    </style>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
         <div class="login-box">
             <div class="login-header">
                 <div class="login-icon">
-                    <img src="/Users/Daniela/laravel/proyecto-BookRep/public/imagenes/logoVertical.png"
+                    <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/25583/images/ojFYHciRPq3uX8OMXXDN_Learn_Biomimicry_Logo_-_Square_-_Transparent_with_Blue_Gradient_-_LRG.png"
                         alt="Login Icon">
                 </div>
                 <h2>Iniciar Sesión</h2>
