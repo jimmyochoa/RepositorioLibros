@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mybooks', [BookController::class, 'index'])->name('mybooks.index');
+    Route::get('/mybooks/create', [BookController::class, 'create'])->name('mybooks.create');
+    Route::post('/mybooks', [BookController::class, 'store'])->name('mybooks.store');
+    Route::get('/mybooks/{book}/edit', [BookController::class, 'edit'])->name('mybooks.edit');
+    Route::put('/mybooks/{book}', [BookController::class, 'update'])->name('mybooks.update');
+    Route::delete('/mybooks/{book}', [BookController::class, 'destroy'])->name('mybooks.destroy');
 });
