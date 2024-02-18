@@ -44,13 +44,6 @@
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <div class="form-group form-footer">
-                    <div class="checkbox">
-                        <input type="checkbox" id="remember-me">
-                        <label for="remember-me">Recuérdame</label>
-                    </div>
-                    <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
-                </div>
                 <div class="form-group">
                     <button type="submit" class="login-button">Login</button>
                 </div>
