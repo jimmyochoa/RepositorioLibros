@@ -20,7 +20,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
 
     <!--Estilos de css-->
-    @vite(['resources/css/style-landing.css', 'resources/js/app.js'])
+    <style rel="stylesheet">body{font-family:'Bentham',serif;color:#333;background-color:#BEDDE2;}.container{max-width:1200px;}header{margin-bottom:2rem;}.navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;}.navbar-brand{font-size:1.5rem;font-weight:bold;}.nav{list-style:none;padding:0;}.nav-link{text-decoration:none;color:#333;margin-left:1rem;font-size:1rem;transition:color 0.3s ease;}.nav-link:hover{color:#2F4858;}section{background-color:#fff;padding:2rem;box-shadow:0 0.5rem 1rem rgba(0,0,0,0.1);}h1{font-size:2rem;font-weight:bold;margin-bottom:1rem;}.lead{font-size:1.5rem;margin-bottom:1.5rem;}img.img-fluid{margin-top:1rem;box-shadow:0 0.5rem 1rem rgba(0,0,0,0.1);}.image-caption{text-align:center;font-size:0.9rem;color:#777;margin-top:0.5rem;}footer{color:#777;padding:1rem 0;font-size:0.8rem;}.nav-link-custom{margin-right:4rem;}
+    </style>
 </head>
 
 
@@ -31,7 +32,7 @@
             <nav class="navbar">
                 <!-- Poner LOGO después-------------- -->
                 <div class="navbar-brand">
-                    <img src="{{ asset('public/imagenes/logoHorizontal.png') }}" alt="Logo">
+                    <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/25583/images/ojFYHciRPq3uX8OMXXDN_Learn_Biomimicry_Logo_-_Square_-_Transparent_with_Blue_Gradient_-_LRG.png" alt="Logo" width="150" height="150">
                     </a>
                 </div>
 
