@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.registro');
     }
 
     /**
@@ -59,7 +59,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(Request $request)
+    public function registro(Request $request)
     {
         // Validation (you can customize this)
         $request->validate([
