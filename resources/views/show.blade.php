@@ -7,14 +7,15 @@
     <title>Detalles del Libro</title>
     <!-- Cdn Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Estilo de google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
+
+     <!-- Estilo de Google Fonts -->
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+
     <!-- Estilos de css -->
     <style>
         body {
-            font-family: 'Bentham', serif;
+            font-family: 'Lato', serif;
             color: #333;
             background-color: #f8f9fa;
         }
@@ -99,6 +100,7 @@
 
         .back-button {
             margin-bottom: 20px;
+             color: #00AABF;
         }
     </style>
 </head>
@@ -174,3 +176,4 @@
 </body>
 
 </html>
+
