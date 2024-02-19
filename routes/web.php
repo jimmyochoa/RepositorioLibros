@@ -37,3 +37,5 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/', [BookController::class, 'landing'])->name('landing');
 Route::get('/{id}', [BookController::class, 'show'])->name('show_libro');
+Route::post('books/{id}/add-comment', [BookController::class, 'addComment'])->name('books.addComment');
+Route::delete('/books/{bookId}/comments/{commentId}', [BookController::class, 'deleteComment'])->name('books.deleteComment');

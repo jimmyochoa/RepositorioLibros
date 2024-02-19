@@ -77,7 +77,7 @@
 
         <section id="products">
             <div class="container">
-                <h2 class="text-center mb-5">Nuestros Libros</h2>
+                <h2 class="text-center mb-5">Libros recientemente publicados de nuestros colaboradores</h2>
                 <div class="row">
                     @foreach($books as $book)
                     <div class="col-lg-4">

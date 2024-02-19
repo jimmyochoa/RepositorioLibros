@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -14,18 +15,57 @@ class BookController extends Controller
         $books = Book::orderBy('id', 'asc')->paginate(6);
         return view('landing', compact('books'));
     }
-    
-    public function show($id)
+    public function addComment(Request $request, $id)
     {
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
         $book = Book::find($id);
-    
+
         if (!$book) {
             return redirect()->route('landing')->with('error', 'El libro no se encontró.');
         }
-    
-        return view('show', compact('book'));
+
+        $comment = new Comment();
+        $comment->content = $request->input('content');
+        $comment->user_id = Auth::id();
+        $comment->book_id = $book->id;
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Comentario agregado correctamente.');
     }
-    
+
+    public function deleteComment($bookId, $commentId)
+    {
+        $comment = Comment::find($commentId);
+
+        if (!$comment) {
+            return redirect()->back()->with('error', 'El comentario no se encontró.');
+        }
+
+        // Verificar si el usuario tiene permiso para eliminar el comentario
+        if ($comment->user_id === Auth::id() || Auth::user()->isAdmin()) {
+            $comment->delete();
+            return redirect()->back()->with('success', 'Comentario eliminado correctamente.');
+        }
+
+        return redirect()->back()->with('error', 'No tienes permiso para eliminar este comentario.');
+    }
+
+    public function show($id)
+    {
+        $book = Book::find($id);
+
+        if (!$book) {
+            return redirect()->route('landing')->with('error', 'El libro no se encontró.');
+        }
+
+        // Obtener todos los comentarios del libro
+        $comments = Comment::where('book_id', $book->id)->get();
+
+        return view('show', compact('book', 'comments'));
+    }
     public function index()
     {
         $books = Auth::user()->books()->paginate(6);

@@ -44,6 +44,11 @@
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         }
 
+        .book-details p {
+            margin-bottom: 10px; /* Reducido el margen inferior del párrafo */
+            word-wrap: break-word; /* Permite que el texto se ajuste dentro del contenedor */
+        }
+
         .comments {
             background-color: #fff;
             padding: 30px;
@@ -53,6 +58,9 @@
 
         .comment {
             margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
         }
 
         .comment .user {
@@ -68,6 +76,8 @@
 
         .comment p {
             margin-bottom: 0;
+            word-wrap: break-word; /* Permite que el texto se ajuste dentro del contenedor */
+            overflow-wrap: break-word; /* Controla el desbordamiento de palabras largas */
         }
 
         .add-comment {
@@ -77,45 +87,86 @@
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             margin-top: 30px;
         }
+
+        .add-comment textarea {
+            width: 100%;
+            resize: vertical; /* Permite redimensionar verticalmente si el contenido excede */
+        }
+
+        .auth-buttons {
+            margin-top: 20px;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="back-button">
+                    <a href="{{ route('landing') }}" class="btn btn-secondary">Volver a inicio</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="book-details">
                     <h2>{{ $book->titulo }}</h2>
                     <img src="{{ asset($book->imagen) }}" alt="{{ $book->titulo }}">
                     <p><strong>Autor:</strong> {{ $book->author->first_name }}</p>
-                    <p><strong>Descripción:</strong> {{ $book->descripcion }}</p>
+                    <p><strong>Descripción:</strong></p>
+                    <p>{{ $book->descripcion }}</p>
                     <a href="{{ $book->url }}" class="btn btn-primary">Leer libro</a>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="comments">
                     <h3>Comentarios</h3>
+                    @foreach($comments as $comment)
                     <div class="comment">
-                        <p class="user">Nombre de Usuario</p>
-                        <p class="date">Fecha del Comentario</p>
-                        <p>Contenido del Comentario</p>
+                        <p class="user">{{ $comment->user->first_name }} {{ $comment->user->second_name }}</p>
+                        <p class="date">{{ $comment->created_at->diffForHumans() }}</p>
+                        <p>{{ $comment->content }}</p>
+                        @if(auth()->check() && $comment->user_id === auth()->id())
+                            <form action="{{ route('books.deleteComment', ['bookId' => $book->id, 'commentId' => $comment->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar comentario</button>
+                            </form>
+                        @endif
                     </div>
-                    <!-- Más comentarios aquí -->
+                    @endforeach
                 </div>
+                @auth
                 <div class="add-comment">
                     <h3>Agregar Comentario</h3>
-                    <!-- Formulario para agregar comentario -->
-                    <form action="#" method="POST">
+                    <form action="{{ route('books.addComment', ['id' => $book->id]) }}" method="POST">
+                        @csrf
                         <div class="mb-3">
-                            <label for="comment">Tu Comentario</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                            <label for="content">Tu Comentario (Máximo 250 palabras)</label>
+                            <textarea class="form-control" id="content" name="content" rows="3" maxlength="250" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Agregar Comentario</button>
                     </form>
                 </div>
+                @else
+                <div class="auth-buttons">
+                    <p>Debes iniciar sesión para agregar un comentario.</p>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Iniciar sesión</a>
+                    <a href="{{ route('registro') }}" class="btn btn-secondary">Registrarse</a>
+                </div>
+                @endauth
             </div>
         </div>
     </div>
+        <!--pie de página -->
+        <footer class="text-center mt-4">
+            <p>&copy; Lenguajes de Programación - proyecto laravel lol*</p>
+        </footer>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -123,4 +174,3 @@
 </body>
 
 </html>
-
