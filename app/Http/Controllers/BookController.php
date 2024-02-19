@@ -41,13 +41,13 @@ class BookController extends Controller
     {
         $request->validate([
             'titulo' => 'required',
-            'descripcion' => ['required', 'string', 'min:80'],
+            'descripcion' => ['required', 'string', 'min:50'],
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif',
             'url' => 'required|url',
         ], [
             'titulo.required' => 'El título del libro es obligatorio.',
             'descripcion.required' => 'La descripción del libro es obligatoria.',
-            'descripcion.min' => 'La descripción del libro debe tener al menos 80 palabras.',
+            'descripcion.min' => 'La descripción del libro debe tener al menos 50 palabras.',
             'imagen.required' => 'La imagen del libro es obligatoria.',
             'imagen.image' => 'El archivo debe ser una imagen.',
             'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
@@ -79,13 +79,13 @@ class BookController extends Controller
     {
         $request->validate([
             'titulo' => 'required',
-            'descripcion' => ['required', 'string', 'min:80'],
+            'descripcion' => ['required', 'string', 'min:50'],
             'imagen' => 'image|mimes:jpeg,png,jpg,gif',
             'url' => 'required|url',
         ], [
             'titulo.required' => 'El título del libro es obligatorio.',
             'descripcion.required' => 'La descripción del libro es obligatoria.',
-            'descripcion.min' => 'La descripción del libro debe tener al menos 80 palabras.',
+            'descripcion.min' => 'La descripción del libro debe tener al menos 50 palabras.',
             'imagen.image' => 'El archivo debe ser una imagen.',
             'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
             'url.required' => 'La URL del libro es obligatoria.',
