@@ -14,6 +14,7 @@ use App\Http\Controllers\BookController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/registro', [UserController::class, 'showRegistrationForm'])->name('registro');
@@ -24,9 +25,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
-Route::get('/', function () {
-    return view('landing');
-});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/mybooks', [BookController::class, 'index'])->name('mybooks.index');
@@ -36,3 +35,5 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/mybooks/{book}', [BookController::class, 'update'])->name('mybooks.update');
     Route::delete('/mybooks/{book}', [BookController::class, 'destroy'])->name('mybooks.destroy');
 });
+Route::get('/', [BookController::class, 'landing'])->name('landing');
+Route::get('/{id}', [BookController::class, 'show'])->name('show_libro');

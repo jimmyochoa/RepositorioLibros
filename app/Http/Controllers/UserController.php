@@ -27,16 +27,20 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        // Validation (you can customize this)
+        // Validation
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'El campo de correo electrónico es obligatorio.',
+            'email.email' => 'Debe ingresar un correo electrónico válido.',
+            'password.required' => 'El campo de contraseña es obligatorio.',
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->route('mybooks.index');
         } else {
-            return back()->withErrors(['email' => 'Invalid credentials']);
+            return back()->withInput()->withErrors(['email' => 'Las credenciales son inválidas.']);
         }
     }
 
@@ -58,12 +62,20 @@ class UserController extends Controller
      */
     public function registro(Request $request)
     {
-        // Validation (you can customize this)
+        // Validation
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
+        ], [
+            'first_name.required' => 'El campo de nombre es obligatorio.',
+            'last_name.required' => 'El campo de apellido es obligatorio.',
+            'email.required' => 'El campo de correo electrónico es obligatorio.',
+            'email.email' => 'Debe ingresar un correo electrónico válido.',
+            'email.unique' => 'Este correo electrónico ya está en uso.',
+            'password.required' => 'El campo de contraseña es obligatorio.',
+            'password.min' => 'La contraseña debe tener al menos :min caracteres.',
         ]);
 
         $user = User::create([
@@ -75,7 +87,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('mybooks.index');
+        return redirect()->route('mybooks.index')->with('success', '¡Bienvenido! Te has registrado exitosamente.');
     }
 
     /**
@@ -90,6 +102,6 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Has cerrado sesión exitosamente.');
     }
 }
