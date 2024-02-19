@@ -9,12 +9,28 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
+    public function landing()
+    {
+        $books = Book::orderBy('id', 'asc')->paginate(6);
+        return view('landing', compact('books'));
+    }
+    
+    public function show($id)
+    {
+        $book = Book::find($id);
+    
+        if (!$book) {
+            return redirect()->route('landing')->with('error', 'El libro no se encontró.');
+        }
+    
+        return view('show', compact('book'));
+    }
+    
     public function index()
     {
         $books = Auth::user()->books()->paginate(6);
         return view('mybooks.index', compact('books'));
     }
-    
 
     public function create()
     {
@@ -24,25 +40,35 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'titulo' => 'required',
+            'descripcion' => ['required', 'string', 'min:80'],
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'url' => 'required|url',
+        ], [
+            'titulo.required' => 'El título del libro es obligatorio.',
+            'descripcion.required' => 'La descripción del libro es obligatoria.',
+            'descripcion.min' => 'La descripción del libro debe tener al menos 80 palabras.',
+            'imagen.required' => 'La imagen del libro es obligatoria.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
+            'url.required' => 'La URL del libro es obligatoria.',
+            'url.url' => 'La URL proporcionada no es válida.',
         ]);
-    
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+
+        $imageName = time().'.'.$request->imagen->extension();
+        $request->imagen->move(public_path('images'), $imageName);
     
         $book = new Book([
-            'titulo' => $request->get('title'), // Cambiado a 'titulo'
-            'descripcion' => $request->get('description'), // Cambiado a 'descripcion'
-            'imagen' => 'images/'.$imageName, // Ajustado a 'imagen'
+            'titulo' => $request->get('titulo'),
+            'descripcion' => $request->get('descripcion'),
+            'imagen' => 'images/'.$imageName,
+            'url' => $request->get('url'),
             'user_id' => Auth::id(),
         ]);
         $book->save();
     
-        return redirect()->route('mybooks.index')->with('success', 'Book has been added');
+        return redirect()->route('mybooks.index')->with('success', 'El libro ha sido añadido correctamente.');
     }
-    
 
     public function edit(Book $book)
     {
@@ -53,33 +79,43 @@ class BookController extends Controller
     {
         $request->validate([
             'titulo' => 'required',
-            'descripcion' => 'required',
+            'descripcion' => ['required', 'string', 'min:80'],
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif',
+            'url' => 'required|url',
+        ], [
+            'titulo.required' => 'El título del libro es obligatorio.',
+            'descripcion.required' => 'La descripción del libro es obligatoria.',
+            'descripcion.min' => 'La descripción del libro debe tener al menos 80 palabras.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
+            'url.required' => 'La URL del libro es obligatoria.',
+            'url.url' => 'La URL proporcionada no es válida.',
         ]);
 
-        $book->titulo = $request->get('titulo');
-        $book->descripcion = $request->get('descripcion');
+        $book->titulo = $request->input('titulo');
+        $book->descripcion = $request->input('descripcion');
+        $book->url = $request->input('url');
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('imagen')) {
             if (!is_null($book->imagen)) {
                 Storage::delete($book->imagen);
             }
             
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $imageName = time().'.'.$request->imagen->extension();
+            $request->imagen->move(public_path('images'), $imageName);
             $book->imagen = 'images/'.$imageName;
         }
 
         $book->save();
 
-        return redirect()->route('mybooks.index')->with('success', 'Book has been updated');
+        return redirect()->route('mybooks.index')->with('success', 'El libro ha sido actualizado correctamente.');
     }
-
 
     public function destroy(Book $book)
     {
         Storage::delete($book->imagen);
         $book->delete();
 
-        return redirect()->route('mybooks.index')->with('success', 'Book has been deleted');
+        return redirect()->route('mybooks.index')->with('success', 'El libro ha sido eliminado correctamente.');
     }
 }

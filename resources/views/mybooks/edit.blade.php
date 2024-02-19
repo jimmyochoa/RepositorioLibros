@@ -20,19 +20,32 @@
     <main style="margin-top: 58px;">
         <div class="container pt-4">
             <h1 class="text-center">Editar Libro</h1>
-            
-            <form action="{{ route('mybooks.update', ['book' => $book->id]) }}" method="POST" enctype="multipart/form-data">
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            <form action="{{ route('mybooks.update', ['book' => $book->id]) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $book->titulo }}" required>
+                    <input type="text" class="form-control" id="titulo" name="titulo"
+                        value="{{ $book->titulo }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción:</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required>{{ $book->descripcion }}</textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
+                        required>{{ $book->descripcion }}</textarea>
                 </div>
 
                 <div class="mb-3">
@@ -40,9 +53,15 @@
                     <input type="file" class="form-control" id="imagen" name="image">
                 </div>
 
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL:</label>
+                    <input type="text" class="form-control" id="url" name="url"
+                        value="{{ $book->url }}" required>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </form>
-            
+
             <a href="{{ route('mybooks.index') }}" class="btn btn-secondary mt-3">Volver a Inicio</a>
         </div>
     </main>
