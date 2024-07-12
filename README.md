@@ -11,7 +11,7 @@ Este es un proyecto de Laravel para una biblioteca que facilita el inicio de ses
 - [Configuración](#configuración)
 - [Migraciones](#migraciones)
 - [Uso](#Uso)
-- [Capturas de Pantalla](#capturas-de-pantalla)
+- [Capturas de Pantalla](#capturas)
 - [Licencia](#licencia)
 
 ## Descripción
@@ -87,10 +87,18 @@ Ejecuta las migraciones para crear las tablas necesarias en tu base de datos:
 
 ```bash
 php artisan migrate
-
+```
 ## Uso
 
 Para iniciar el servidor de desarrollo de Laravel:
 
 ```bash
 php artisan serve
+```
+## Capturas
+
+A continuación, se presentan algunas capturas de pantalla de la aplicación:
+
+![Main](screenshots/login.png)
+
+
