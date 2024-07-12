@@ -99,6 +99,15 @@ php artisan serve
 
 A continuación, se presentan algunas capturas de pantalla de la aplicación:
 
-![Main](screenshots/login.png)
+![Captura 1](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/1.png)
+![Captura 2](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/2.png)
+![Captura 3](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/3.png)
+![Captura 4](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/4.png)
+![Captura 5](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/5.png)
+![Captura 6](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/6.png)
+![Captura 7](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/7.png)
+![Captura 8](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/8.png)
+![Captura 9](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/9.png)
+![Captura 10](https://raw.githubusercontent.com/jimmyochoa/RepositorioLibros/main/capturas/10.png)
 
 
